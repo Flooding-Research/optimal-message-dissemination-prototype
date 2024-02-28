@@ -1,6 +1,6 @@
 [submodule "merklecpp"]
 	path = merklecpp
-	url = https://github.com/microsoft/merklecpp.git
+	url = git@github.com:microsoft/merklecpp.git
 [submodule "schifra"]
 	path = schifra
 	url = git@github.com:ArashPartow/schifra.git
