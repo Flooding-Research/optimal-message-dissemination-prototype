@@ -27,8 +27,8 @@ g++ -std=c++17 -O3 wf2f.cpp -lcrypto -ltbb
 ## Usage
 The compiled code can be executed in the command line and does not take any arguments.
 
-The program first generates a message consisting of `MSG_LENGTH` random bytes and executes the sender protocol of `WeakFlood2Flood` to obtain a `vector` of `NUM_SHARES` packets that are to be disseminated using a `WeakFlood` protocol.
+The program first generates a message consisting of `MSG_LENGTH` random bytes and executes the sender protocol of `WeakFlood2Flood` to obtain a vector of `NUM_SHARES` packets that are to be disseminated using a `WeakFlood` protocol.
 Next, `MAX_DELETIONS` random packets are chosen and their accumulated values are set to the hash of the empty string, to simulate corrupted packets.
-Finally, the receiver protocol of `WeakFlood2Flood` is executed on the obtained packets. The obtained message is then compared to the original message to determine whether it would have been received successfully.
+Finally, the receiver protocol of `WeakFlood2Flood` is executed on the obtained packets. The obtained message is then compared to the original one to determine whether it would have been received successfully.
 
 The program outputs the times to execute the sender and receiver protocols, respectively, and whether the correct message was decoded. Note that the `WeakFlood` subprotocol is not implemented, i.e., no messages are actually send over a network. This program thus only measures the computational overhead of `WeakFlood2Flood` over an assumed `WeakFlood` protocol.
