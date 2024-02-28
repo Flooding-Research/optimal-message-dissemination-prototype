@@ -1,0 +1,3 @@
+[submodule "merklecpp"]
+	path = merklecpp
+	url = https://github.com/microsoft/merklecpp.git
