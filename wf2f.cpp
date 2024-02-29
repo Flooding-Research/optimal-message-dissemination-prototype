@@ -257,14 +257,12 @@ std::string ecc_decode(const std::vector<std::string> &shares, const std::vector
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //// WeakFlood2Flood protocol /////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 struct WeakFloodPacket
 {
 	std::string share;
-	std::vector<unsigned char> randomness;
 	AccumProof accum_proof;
 	AccumValue accum_val;
-	WeakFloodPacket(std::string s, std::vector<unsigned char> r, AccumProof p, AccumValue v) : share(s), randomness(r), accum_proof(p), accum_val(v){};
+	WeakFloodPacket(std::string s, AccumProof p, AccumValue v) : share(s), accum_proof(p), accum_val(v){};
 };
 
 // helper function, converting 32 bit integer `i` and message `msg` to a string by prepending hex encoding of `i` to `msg`
@@ -296,10 +294,7 @@ std::vector<WeakFloodPacket> weak_flood_2_flood_send(const std::string &message)
 	std::vector<WeakFloodPacket> packets;
 	for (size_t i = 0; i < shares.size(); ++i)
 	{
-		unsigned char randomness[16];
-		RAND_bytes(randomness, sizeof(randomness));
-		std::vector<unsigned char> rand(randomness, randomness + 16);
-		WeakFloodPacket packet = WeakFloodPacket(shares[i], rand, proofs[i], accum_val);
+		WeakFloodPacket packet = WeakFloodPacket(shares[i], proofs[i], accum_val);
 		packets.push_back(packet);
 	}
 
